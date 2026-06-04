@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: rent-seeking-analysis-backend
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+
+server:
+  port: ${BACKEND_PORT:8081}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    com.rentseeking.analysis: INFO
+  pattern:
+    level: "%5p [%X{traceId:-}]"
+
+app:
+  security:
+    jwt-secret: ${JWT_SECRET:local-development-secret-change-me-please-32}
+    token-expire-minutes: ${JWT_EXPIRE_MINUTES:120}
+  ai:
+    enabled: ${AI_ENABLED:true}
+    provider: ${AI_PROVIDER:openai-compatible}
+    base-url: ${AI_BASE_URL:}
+    api-key: ${AI_API_KEY:}
+    model: ${AI_MODEL:}
+    timeout: ${AI_TIMEOUT:30s}
